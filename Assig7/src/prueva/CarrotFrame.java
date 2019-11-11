@@ -1,6 +1,7 @@
 package prueva;
 
 
+
 // CarrotFrame.java 
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +12,7 @@ import javax.swing.*;
  */ 
  class CarrotFrame extends JFrame implements KeyListener, ActionListener
 {
-        private CarrotComponent carrotComponent;
+    private CarrotComponent carrotComponent;
 	private JButton start;
 	private JButton finish;
 	private JButton slow;
@@ -20,7 +21,7 @@ import javax.swing.*;
 	
 	
 	 public CarrotFrame( ) {
-			 setTitle("Carrot");
+			 setTitle("Super Bunny Game");
 			 
 			 Container content = getContentPane( );
 			 content.setLayout(new BorderLayout( ));
@@ -53,7 +54,7 @@ import javax.swing.*;
 			 content.add(panel, BorderLayout.SOUTH);
 			 
 			 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			 pack( );
+			 pack( ); 
 			 carrotComponent.requestFocusInWindow( );
 			 setVisible(true);
 		 } 
@@ -63,38 +64,32 @@ import javax.swing.*;
     
         if (e.getSource( ).equals(finish)) {
             
-         }
+         } 
        else if (e.getSource( ).equals(slow)) {
               
         }
 
         else if (e.getSource( ).equals(start)) {
               carrotComponent.reset( );
-               
         }
      }
         // Must implement the next three methods to implement the KeyListener
-        // interface -- aka "notifications" sent by the system on various events
-	
-        // Key typed notification -- down and up
+        // interface
     public void keyTyped(KeyEvent e) { 
-    	//not relevant
+    	
     }
     public void keyPressed(KeyEvent e) {
-       // use e.getCharCode( ) to get its character
-       // use e.getKeyCode( ) for things like up/down arrow
-        carrotComponent.key(e.getKeyCode( ));
+      
+        carrotComponent.keyPressed(e.getKeyCode( ));
     }
-       // Key released -- the up stroke
-
+    
     public void keyReleased(KeyEvent e) {
-    /* not relevant to this application */ 
-    	}
+   
+    }
  
  
     public static void main(String[ ] args) {
-      CarrotFrame frame = new CarrotFrame( );
-      
-      
+    /// add the 
+       new CarrotFrame();
    }
 }
