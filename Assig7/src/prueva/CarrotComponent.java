@@ -2,14 +2,19 @@ package prueva;
 
 
 
-/* 1) I add a second bunny which move Up with E Down with X, 
- *  Left with S, and Right with D. The orginal bunny 
- *  moves are controlled by the Up, Down, Left, and 
+/* 
+ * if the player choose to play with another person
+ * 
+ * 1) 
+ * The first bunny is
+ *  controlled by the Up, Down, Left, and 
  *  Right Virtual Keys of the keyboard VK_UP, VK_DOWN,
  *  VK_LEFT and VK_RIGHT. 
- * 2) Using  g.drawString() the program maintain scores for each of the 
+ *  the second player will move the bunny Up with E, Down with X, 
+ *  Left with S, and Right with D. 
+ *  
+ * 2) We are using  g.drawString() to maintain scores for each of the 
  * two bunnies, and each carrot worths 5 points. 
- * Implements the main component for the carrot game.
 */
 import java.util.*;
 import java.awt.*;
@@ -23,7 +28,8 @@ import javax.imageio.*;
    public class CarrotComponent extends JComponent 
    { 
 	 
-	     private ArrayList myPoints; // x,y position of each carrot
+	     // position of each carrot
+	     private ArrayList<Point> myPoints; 
 		 private int myX; // upper left of image x
 		 private int myY; // upper left of image y
 		 private int myDy; // change in y for gravity
@@ -32,6 +38,7 @@ import javax.imageio.*;
 		 int carrotsPoinsBunny1 = 0;// new score
 		 int carrotsPoinsBunny2 = 0;//new score
                  //for bunny 2
+		 String mainPlayer = "main Player";
 		 private Image bunnyImage2, bunnyImage1;  
 		 private int my2X = getWidth()-100; // upper left of head x
 		 private int my2Y = 50; // upper left of head y
@@ -50,27 +57,22 @@ import javax.imageio.*;
 		 
 		 public CarrotComponent( ) 
 		 {
-		 
-		 setPreferredSize(new Dimension(SIZE, SIZE));
-		 
-		 // getScaledInstance( ) gives us re-sized version of the image --
-		 // speeds up the drawImage( ) if the image is already the right size
-		 // See paintComponent( )
-		
+		  setPreferredSize(new Dimension(SIZE, SIZE));
+		 bunnyImage1 = readImage("image/bugs-bunny1.jpg");
+		 bunnyImage1 = bunnyImage1.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
+
 		 //second bunny
+		 setPreferredSize(new Dimension(SIZE, SIZE));
 		 bunnyImage2 = readImage("image/bunny2.jpg");
 		 bunnyImage2 = bunnyImage2.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
 		 
-		 
-		 bunnyImage1 = readImage("image/bugs-bunny1.jpg");
-		 bunnyImage1 = bunnyImage1.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
+		
 		 
 		
 		 carrotImage = readImage("image/carrot.gif");
 		 carrotImage = carrotImage.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
 		 
-		 
-		 myPoints = new ArrayList();
+		 myPoints = new ArrayList<Point>();
 		 }
 	 
 	 
@@ -79,42 +81,46 @@ import javax.imageio.*;
 	      int x = (int)(Math.random()*(getWidth() - PIXELS));
 	      int y = (int)(Math.random()*(getHeight() - PIXELS));
 			
-		Point p = new Point(x, y);
+		 Point p = new Point(x, y);
 		
-		return p; 
+		 return p; 
        }
 
-      // Check the current x,y vs. the carrots
+      // Check the current x,y of the bunny and the carrots to collect the points
       public void checkCollisions(int X, int Y, int bunny) {
         for (int i = 0 ; i < myPoints.size( ); i++) {
            Point point = (Point) myPoints.get(i);
        
-           // if we overlap a carrot, remove it
+           // if the player pass over a carrot, we remove carrot and add 5 ponts to the player 
+           //who got the carrot.
            if (Math.abs(point.getX( ) - X) <= PIXELS && Math.abs(point.getY( ) - Y) <= PIXELS) 
            {
                //points
         	 if (bunny == 1 ){
         		 carrotsPoinsBunny1 += FIVE;
         	 }
-        	 else{//bnny 2
+        	 else{//bunny 2
         		 carrotsPoinsBunny2 += FIVE;
-        	 }
+        	 } 
+        	 
+        	 
         	 myPoints.remove(i); // removes carrot from the ArrayList
-                 i--;                        // tricky:
+             i--;                          // tricky:
                                 // back i up, since we removed the ith element
               repaint( );
               }
             }
+        // when there are no more carrots
            if (myPoints.size( ) == 0) {
-               reset( ); // new game
-               
-                // add the message who us the winner
+        	   ImageIcon icon = new ImageIcon(bunnyImage1);
+               JOptionPane.showMessageDialog(null, "The winner is " + mainPlayer +".", 
+                 "WINNER MESSAGE", JOptionPane.INFORMATION_MESSAGE, icon);
              }
        } 
 		
 		
     
-    public void key(int code) 
+    public void keyPressed(int code) 
     {
     	 if (code == KeyEvent.VK_UP)
     	 {
@@ -157,25 +163,26 @@ import javax.imageio.*;
     	   my2X += MOVE;
     	   bunnynumber = 2;
     	 }
-    	 checkCollisions(my2X,my2Y, bunnynumber );
-    	 checkCollisions(myX,myY, bunnynumber );
+    	 if(bunnynumber == 1) {
+    		 checkCollisions(myX,myY, bunnynumber );
+    	 }else {
+    		 checkCollisions(my2X,my2Y, bunnynumber );
+    	 }
     	 
     	 repaint( );
      } 
    
 	
-     // Draws the head and carrots
+     // Draws the bunny and carrots
       public void paintComponent(Graphics g) {
       
     	  
         g.drawImage(bunnyImage2, myX, myY, PIXELS, PIXELS, null);
         g.drawImage(bunnyImage1,my2X, my2Y, PIXELS, PIXELS, null);
         
-        
-        g.setFont(FONT);
         g.setColor(Color.MAGENTA);
-        
-        g.drawString("Pink bunny : " + carrotsPoinsBunny1, 10, 50);
+        g.setFont(FONT);
+        g.drawString(mainPlayer +" : " + carrotsPoinsBunny1, 10, 50);
         g.drawString("Bug bunny : " + carrotsPoinsBunny2, getWidth()- 200, 50);
         
         // Draw all the carrots
@@ -204,26 +211,10 @@ import javax.imageio.*;
 	  return(image);
 	 } 
 	
-	  
-	  // Advance things by one tick -- do gravity, check collisions
-	 public void tick( ) {
-	     myDy = myDy + GRAVITY; // increase dy
-	     myY += myDy; // figure new y
-	  
-	     
-	     // check if hit bottom
-	     if (myY + PIXELS >= getHeight( )) {
-	     // back y up
-	     myY -= myDy;
-	 
-	     // reverse direction of dy (i.e. bounce), but with 98% efficiency
-	     myDy = (int) (0.98 * -myDy);
-	     }
-	     
-	    checkCollisions(myX,myDy, 1);
-	    repaint( );
-	  }
-	  
+/***
+ * @param does not need it
+ * this method only set the score to 0 and display all the carrots when the player stars a new game 
+ * */
 	  public void reset(){
 		  
 		  myPoints.clear();
@@ -237,6 +228,7 @@ import javax.imageio.*;
 			  my2Y = 50; 
 			  carrotsPoinsBunny1 = 0;
 			  carrotsPoinsBunny2 = 0;
-		  
+			  repaint( );
 	  }
+	  
  }
