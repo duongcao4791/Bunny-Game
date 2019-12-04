@@ -1,7 +1,6 @@
 package prueva;
 
 
-
 /* 
  * if the player choose to play with another person
  * 
@@ -35,13 +34,16 @@ import javax.imageio.*;
                  //for bunny 2
 		 private String bunnyString1 = "Gricelda 1 ", bunnyString2 = "Gricelda 2 ";
 		 
-		 private Image bunnyImage2, bunnyImage1,  carrotImage;  
+		 
+		 private Image []  bunnyImage2;
+		 private Image [] bunnyImage1 ;
+		 private Image  carrotImage, grassBack;  
 	
 		 private int bunnynumber;
 		 
 		 
          public static final int SIZE = 900; // initial size
-		 public static final int PIXELS = 50; // square size per image
+		 public static final int PIXELS = 70; // square size per image
 		 public static final int MOVE = 20; // keyboard move
 		 public static final int GRAVITY = 10; // gravity move
 		 public static final int CARROTS = 11; // number of carrots
@@ -56,6 +58,7 @@ import javax.imageio.*;
 		 private int myY ; // upper left y of bunny 
 		 private int my2X; // upper left x of bunny2
 		 private int my2Y; // upper left y of bunny2
+		 private boolean playing = false;
 
 		 
 		 public static final Font FONT = new Font("Dialog", 0, 24);
@@ -65,19 +68,44 @@ import javax.imageio.*;
 		 {
 		
 		 setPreferredSize(new Dimension(SIZE, SIZE));
-		 myX = 60;
+		 myX = SIZE- 260;
 		 myY = 60;
-		 my2X = SIZE- 260; 
+		 my2X = 60; 
 		 my2Y = 60; 
-		 bunnyImage1 = readImage("image/bugs-bunny1.jpg");
-		 bunnyImage1 = bunnyImage1.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
-
+		 bunnyImage1 = new Image [7];
+		 bunnyImage1[0] = readImage("image/downbunny01.png");//wing
+		 bunnyImage1[1] = readImage("image/upbunny01.png");
+		 bunnyImage1[2] = readImage("image/Rigthbunny01.png");
+		 bunnyImage1[3] = readImage("image/downbunny01.png");
+		 bunnyImage1[4] = readImage("image/Leftbunny01.png");
+		 bunnyImage1[5] = readImage("image/win01.jpg");
+		 bunnyImage1[6] = readImage("image/win01.jpg");
+		
 		 //second bunny
-		 bunnyImage2 = readImage("image/bunny2.jpg");
-		 bunnyImage2 = bunnyImage2.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
+		 bunnyImage2 = new Image [7];
+		 bunnyImage2[0] = readImage("image/dowmBunny02.jpg" );
+		 bunnyImage2[1] = readImage("image/upbunny02.png");
+		 bunnyImage2[2] = readImage("image/Rigthbunny02.gif");
+		 bunnyImage2[3] = readImage("image/dowmBunny02.jpg" );
+		 bunnyImage2[4] = readImage("image/leftbunny02.jpg" );
+		 bunnyImage2[5] = readImage("image/win02.jpg" );
+		 bunnyImage2[6] = readImage("image/stop02.jpg" );
+		
+				 
+				
 
 		 carrotImage = readImage("image/carrot.gif");
+		 
 		 carrotImage = carrotImage.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
+		 
+		 grassBack = readImage("image/growing-green-grass.jpg");
+		 grassBack  = grassBack .getScaledInstance(SIZE - 100 , SIZE - 300,Image.SCALE_SMOOTH);
+		 
+		 //both bunny configurations
+		 for (int i = 0; i < 7; i ++) {
+			  bunnyImage1[i] = bunnyImage1[i].getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
+			  bunnyImage2[i] = bunnyImage2[i].getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
+		 }
 		 
 		 carrotPosition = new ArrayList<Point>();
 		 }
@@ -122,20 +150,14 @@ import javax.imageio.*;
         	   
         	   
         	   if (carrotsPoinsBunny2 > carrotsPoinsBunny1) {
-        		      ImageIcon icon = new ImageIcon(bunnyImage2);
+        		      ImageIcon icon = new ImageIcon(bunnyImage2[5]);
                      JOptionPane.showMessageDialog(null, "The winner is " + bunnyString2 +".", 
                      "WINNER MESSAGE", JOptionPane.INFORMATION_MESSAGE, icon);
         	   }else  if (carrotsPoinsBunny2 < carrotsPoinsBunny1) {
-        		       ImageIcon icon = new ImageIcon(bunnyImage1);
+        		       ImageIcon icon = new ImageIcon(bunnyImage1[5]);
         		       JOptionPane.showMessageDialog(null, "The winner is " + bunnyString1 +".", 
         			   "WINNER MESSAGE", JOptionPane.INFORMATION_MESSAGE, icon);
-        	   }else {
-        		 
-    		       JOptionPane.showMessageDialog(null, "Sorry, you have not started playing. \n Place, click on the start button", 
-    			   "Message", JOptionPane.INFORMATION_MESSAGE);
-        	   }
-        		   
-        		   
+        	   }  
         	   
              }
        } 
@@ -144,69 +166,114 @@ import javax.imageio.*;
     
     public void keyPressed(int code) 
     {
-    	 if (code == KeyEvent.VK_UP)
-    	 {
-    	   myY += -MOVE;
-    	   bunnynumber = 1;
-    	 }
-    	 else if (code == KeyEvent.VK_DOWN) 
-    	 {
-    	   myY += MOVE;
-    	   bunnynumber = 1;
-    	 }
-    	 else if (code == KeyEvent.VK_LEFT) 
-    	 {
-    	   myX += -MOVE;
-    	   bunnynumber = 1;
-    	 }
-    	 else if (code == KeyEvent.VK_RIGHT) //RIGHT
-    	 {
-    	   myX += MOVE;
-    	   bunnynumber = 1;
-    	 }
-    	 ////second bunny
-    	 if (code == KeyEvent.VK_E)//UP
-    	 {
-    	   my2Y += -MOVE;
-    	   bunnynumber = 2;
-    	 }
-    	 else if (code == KeyEvent.VK_X) //move down
-    	 {
-    	   my2Y += MOVE;
-    	   bunnynumber = 2;
-    	 }
-    	 else if (code == KeyEvent.VK_S) //lelf
-    	 {
-    	   my2X += -MOVE;
-    	   bunnynumber = 2;
-    	 }
-    	 else if (code == KeyEvent.VK_D) //RIGHT
-    	 {
-    	   my2X += MOVE;
-    	   bunnynumber = 2;
-    	 }
-    	 if(bunnynumber == 1) {
-    		 checkCollisions(myX,myY, bunnynumber );
-    	 }else {
-    		 checkCollisions(my2X,my2Y, bunnynumber );
-    	 }
-    	 
-    	 repaint( );
+    	
+    	
+    	if (playing) {
+    		if (code == KeyEvent.VK_UP)
+	    	 {
+    			if(myY > 0) {
+	    		   myY += -MOVE;
+		    	   bunnynumber = 1;
+		    	   bunnyImage1[0] = bunnyImage1[1];
+    			}
+	    	 
+	    	 }
+	    	 else if (code == KeyEvent.VK_DOWN) 
+	    	 {
+	    		 if(myY <  getHeight()-(PIXELS + 10)) {
+		    	   myY += MOVE; 
+		    	   bunnynumber = 1;
+		    	   bunnyImage1[0] = bunnyImage1[3];
+	    	    }
+	    	 }
+	    	 else if (code == KeyEvent.VK_LEFT) 
+	    	 {
+	    		
+	    		 if(myX > 0) {
+		    	   myX += -MOVE;
+		    	   bunnynumber = 1;
+		    	   bunnyImage1[0] = bunnyImage1[4];
+	    		 }
+	    	 }
+	    	 else if (code == KeyEvent.VK_RIGHT) 
+	    	 {
+	    		 if(myX < getWidth() - PIXELS) {
+		    	   myX += MOVE;
+		    	   bunnynumber = 1;
+		    	   bunnyImage1[0] = bunnyImage1[2];
+	    		 }
+	    	 }
+	    	 ////second bunny
+	    	 if (code == KeyEvent.VK_E)//Up
+	    	 {
+	    		 if(my2Y > 0) { 
+		    	   my2Y += -MOVE;
+		    	   bunnynumber = 2;
+		    	   bunnyImage2[0] = bunnyImage2[1];
+	    		 }
+	    	 }
+	    	 else if (code == KeyEvent.VK_X) //down
+	    	 {
+	    		 if(my2Y < getHeight() - (PIXELS + 10) ) {
+		    	   my2Y += MOVE;
+		    	   bunnynumber = 2;
+		    	   bunnyImage2[0] = bunnyImage2[3];
+	    		 }
+	    	 }
+	    	 else if (code == KeyEvent.VK_S) //Left
+	    	 {
+	    		 if(my2X > 0) {
+		    	   my2X += -MOVE;
+		    	   bunnynumber = 2;
+		    	   bunnyImage2[0] = bunnyImage2[4];
+	    		 }else {
+	    			 bunnyImage2[0] = bunnyImage2[6];
+	    		 }
+	    	 }
+	    	 else if (code == KeyEvent.VK_D) //Right
+	    	 {
+	    		 if(my2X < getWidth() - PIXELS) {
+		    	   my2X += MOVE;
+		    	   bunnynumber = 2;
+		    	   bunnyImage2[0] = bunnyImage2[2];
+	    		 }else {
+	    			 bunnyImage2[0] = bunnyImage2[6];
+	    		 }
+	    	 }
+	    	 
+	    	 if(bunnynumber == 1) {
+	    		 checkCollisions(myX,myY, bunnynumber );
+	    	 }else {
+	    		 checkCollisions(my2X,my2Y, bunnynumber );  
+	    	 }
+ 
+   	      repaint( );
+	    	 
+	    } else {
+   		 
+		       JOptionPane.showMessageDialog(null, "Sorry, you have not started playing. \n Place, click on the start button", 
+			   "Message", JOptionPane.INFORMATION_MESSAGE);
+ 	   }
+	    	 
+    	
+	    	 
      } 
    
 	
      // Draws the bunny and carrots
       public void paintComponent(Graphics g) {
       
-    	  
-        g.drawImage(bunnyImage1, myX, myY, PIXELS, PIXELS, null);
-        g.drawImage(bunnyImage2,my2X, my2Y, PIXELS, PIXELS, null);
+    	
+    	g.drawImage( grassBack, 0, 0,  getWidth() , getHeight()  + 90, null);
+        g.drawImage(bunnyImage1[0], myX, myY, PIXELS, PIXELS, null);
+        g.drawImage(bunnyImage2[0],my2X, my2Y, PIXELS, PIXELS, null);
         
         g.setColor(Color.MAGENTA);
         g.setFont(FONT);
-        g.drawString(bunnyString1 +" : " + carrotsPoinsBunny1, 10, 50);
-        g.drawString(bunnyString2 +" : " + carrotsPoinsBunny2, getWidth()- 200, 50);
-        
+        g.drawString(bunnyString1 +" : " + carrotsPoinsBunny1, getWidth()- 200, 50);
+        g.drawString(bunnyString2 +" : " + carrotsPoinsBunny2, 10, 50);
+
+    	
         // Draw all the carrots
          for (int i = 0; i < carrotPosition.size( ); i++) {
            Point p = (Point) carrotPosition.get(i);
@@ -241,6 +308,7 @@ import javax.imageio.*;
 	  public void reset(){
 		  
 		  carrotPosition.clear();
+		  playing = true;
 		  for (int j = 0; j < CARROTS; j++ ){
 			  carrotPosition.add(randomPoint());
 		  }
@@ -251,3 +319,4 @@ import javax.imageio.*;
 	  }
 	  
  }
+
