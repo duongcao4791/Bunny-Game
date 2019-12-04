@@ -1,5 +1,4 @@
 package prueva;
-
 // CarrotFrame.java 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,17 +12,19 @@ import javax.swing.*;
     private CarrotComponent carrotComponent;
 	private JButton start;
 	private JButton finish;
-	private JButton newGame;
+	private JButton newGame; 
 	public static final int SIZE = 800; // initial size
 	
 	
 	 public CarrotFrame( ) { 
+		 
 			 setTitle("Super Bunny Game");
 			 
 			 Container content = getContentPane( );
 			 content.setLayout(new BorderLayout( ));
 			 
 			 carrotComponent = new CarrotComponent( );
+			 
 			 content.add(carrotComponent, BorderLayout.CENTER);
 			
 			 setPreferredSize(new Dimension(SIZE, SIZE));
