@@ -5,8 +5,10 @@ public class Welcomepage {
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame();
+		//CarrotFrame m=new CarrotFrame();
 		//frame.setPreferredSize(new Dimension(500,300));
-		JButton start =new JButton("Start game");
+		JButton start =new JButton("New game");
+		start.addActionListener(event->{CarrotFrame m =new CarrotFrame();});
 		JPanel buttons = new JPanel(new GridBagLayout());
 		JTextField player1=new JTextField(15);
 		JTextField player2=new JTextField(15);
