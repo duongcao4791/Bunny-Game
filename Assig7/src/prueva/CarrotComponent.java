@@ -32,7 +32,7 @@ import javax.imageio.*;
 		 private int carrotsPoinsBunny1 = 0;// new score
 		 private int carrotsPoinsBunny2 = 0;//new score
                  //for bunny 2
-		 private String bunnyString1 = "Gricelda 1 ", bunnyString2 = "Gricelda 2 ";
+		 private String bunnyString1 = "Ladies", bunnyString2 = "Gentlemen ";
 		 
 		 
 		 private Image []  bunnyImage2;
