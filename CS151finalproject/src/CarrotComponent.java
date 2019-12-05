@@ -73,32 +73,32 @@ import javax.imageio.*;
 		 my2X = 60; 
 		 my2Y = 60; 
 		 bunnyImage1 = new Image [7];
-		 bunnyImage1[0] = readImage("downbunny01.png");//wing
-		 bunnyImage1[1] = readImage("upbunny01.png");
-		 bunnyImage1[2] = readImage("Rigthbunny01.png");
-		 bunnyImage1[3] = readImage("downbunny01.png");
-		 bunnyImage1[4] = readImage("Leftbunny01.png");
-		 bunnyImage1[5] = readImage("win01.jpg");
-		 bunnyImage1[6] = readImage("win01.jpg");
+		 bunnyImage1[0] = readImage("images/downbunny01.png");//wing
+		 bunnyImage1[1] = readImage("images/upbunny01.png");
+		 bunnyImage1[2] = readImage("images/rightbunny01.png");
+		 bunnyImage1[3] = readImage("images/downbunny01.png");
+		 bunnyImage1[4] = readImage("images/leftbunny01.png");
+		 bunnyImage1[5] = readImage("images/win01.png");
+		 bunnyImage1[6] = readImage("images/win01.png");
 		
 		 //second bunny
 		 bunnyImage2 = new Image [7];
-		 bunnyImage2[0] = readImage("dowmBunny02.jpg" );
-		 bunnyImage2[1] = readImage("upbunny02.png");
-		 bunnyImage2[2] = readImage("Rigthbunny02.gif");
-		 bunnyImage2[3] = readImage("dowmBunny02.jpg" );
-		 bunnyImage2[4] = readImage("leftbunny02.jpg" );
-		 bunnyImage2[5] = readImage("win02.jpg" );
-		 bunnyImage2[6] = readImage("stop02.jpg" );
+		 bunnyImage2[0] = readImage("images/downbunny02.jpg" );
+		 bunnyImage2[1] = readImage("images/upbunny02.png");
+		 bunnyImage2[2] = readImage("images/rightbunny02.jpg");
+		 bunnyImage2[3] = readImage("images/downbunny02.jpg" );
+		 bunnyImage2[4] = readImage("images/leftbunny02.jpg" );
+		 bunnyImage2[5] = readImage("images/win02.jpg" );
+		 bunnyImage2[6] = readImage("images/stop02.jpg" );
 		
 				 
 				
 
-		 carrotImage = readImage("carrot.gif");
+		 carrotImage = readImage("images/carrot.gif");
 		 
 		 carrotImage = carrotImage.getScaledInstance(PIXELS, PIXELS,Image.SCALE_SMOOTH);
 		 
-		 grassBack = readImage("growing-green-grass.jpg");
+		 grassBack = readImage("images/growing-green-grass.jpg");
 		 grassBack  = grassBack .getScaledInstance(SIZE - 100 , SIZE - 300,Image.SCALE_SMOOTH);
 		 
 		 //both bunny configurations
