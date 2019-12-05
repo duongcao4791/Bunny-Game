@@ -85,11 +85,11 @@ import javax.imageio.*;
 		 bunnyImage2 = new Image [7];
 		 bunnyImage2[0] = readImage("images/downbunny02.jpg" );
 		 bunnyImage2[1] = readImage("images/upbunny02.png");
-		 bunnyImage2[2] = readImage("images/rightbunny02.jpg");
+		 bunnyImage2[2] = readImage("images/rightbunny02.png");
 		 bunnyImage2[3] = readImage("images/downbunny02.jpg" );
 		 bunnyImage2[4] = readImage("images/leftbunny02.jpg" );
 		 bunnyImage2[5] = readImage("images/win02.jpg" );
-		 bunnyImage2[6] = readImage("images/stop02.jpg" );
+		 bunnyImage2[6] = readImage("images/win02.jpg" );
 		
 				 
 				
