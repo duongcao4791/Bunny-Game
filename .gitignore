@@ -11,7 +11,12 @@ someOtherfoler/
 *.exe
 *.o
 *.so
-
+*.idea/
+*.settings/
+*.DS_store
+*.classpath
+*.project
+*.iml
 *.so
 
 # Packages #
