@@ -22,7 +22,7 @@ public class Welcomepage {
 		
 		frame.setVisible(true);
 		frame.setSize(800,800);
-		frame.setContentPane(new JLabel(new ImageIcon("images/welcomerabbit.jpg")));
+		frame.setContentPane(new JLabel(new ImageIcon("images/git add .welcomerabbit.jpg")));
 		frame.setLayout(new FlowLayout());
 	
 		c.gridx=0;
