@@ -2,39 +2,115 @@ import java.awt.*;
 
 import javax.swing.*;
 public class Welcomepage {
+	
+	  static String name1;
+	  static String name2;
+	  static boolean saveName1 = false, saveName2 = false;
+	  public static final int SIZE = 830; // initial size
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame();
-		//CarrotFrame m=new CarrotFrame();
-		//frame.setPreferredSize(new Dimension(500,300));
-		JButton start =new JButton("New game");
-		start.addActionListener(event->{CarrotFrame m =new CarrotFrame();});
+		
+
+		Font style = new Font("Verdana",Font.BOLD,15);
+		
+		
+		JButton start =new JButton("Start  a  new  game");
+		JButton saveP1 =new JButton("Save Name");
+		JButton saveP2 =new JButton("Save Name");
+		
+		JLabel jlabel = new JLabel("Enter name of player 1:");
+	    jlabel.setFont(new Font("Verdana",1,15));
+	    JLabel jlabel2 = new JLabel("Enter name of player 2:");
+	    jlabel2.setFont(style); 
+	
 		JPanel buttons = new JPanel(new GridBagLayout());
-		JTextField player1=new JTextField(15);
-		JTextField player2=new JTextField(15);
-		player1.setText("Enter name of player 1:");
+		buttons. setBackground(Color.cyan);
+		JTextField player1 = new JTextField(20);
+		player1.setFont(style);
+		JTextField player2 = new JTextField(20);
+		player2.setFont(style);
+	
 		player1.setHorizontalAlignment(JTextField.CENTER);
-		player2.setText("Enter name of player 2:");
-		player2.setHorizontalAlignment(JTextField.CENTER);
-		GridBagConstraints c = new GridBagConstraints();
+		player2.setHorizontalAlignment(JTextField.CENTER); 
+		
+		
+		
+		start.addActionListener(event->{
+			if(saveName1  && saveName2 ) {
+				
+				int [] score = {-1 ,-1, -1, -1};
+				Bunny_score bunny1 = new Bunny_score (name1, score);
+				Bunny_score bunny2 = new Bunny_score (name2, score);
+				
+				new CarrotFrame( bunny1,  bunny2); 
+				
+				//done playing reset the JtextFiles for new user
+				player1.setText("");
+				player2.setText("");
+				saveName1 = saveName2 = false;
+			}
+			else {
+		   		 
+			       JOptionPane.showMessageDialog(null, "Sorry, you haven't save the name. \n Please, click on the save button", 
+				   "Message", JOptionPane.INFORMATION_MESSAGE);
+	 	   }
+		
+		});
+		saveP1.addActionListener(event->{
+			name1 =  player1.getText(); 
+			saveName1 = true;
+		});
+		saveP2.addActionListener(event->{
+			name2 =  player2.getText(); 
+			saveName2 = true;
+		});
+		
 	
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		frame.setVisible(true);
-		frame.setSize(800,800);
-		frame.setContentPane(new JLabel(new ImageIcon("images/welcomerabbit.jpg")));
-		frame.setLayout(new FlowLayout());
-	
-		c.gridx=0;
-		c.gridy=1;
+		frame.setPreferredSize(new Dimension(SIZE, SIZE));
 		
-		buttons.add(start,c);
-		c.gridx=0;
-		c.gridy=2;
+	
+		
+		frame.setContentPane(new JLabel(new ImageIcon("image/welcomerabbit.jpg")));
+		frame.setLayout(new FlowLayout());
+		
+	    GridBagConstraints c = new GridBagConstraints();
+		c.gridx =0;
+		c.gridy =0;
+		
+		buttons.add(jlabel,c);
+	
+		c.gridx = 0;
+		c.gridy = 1;
+		c.fill = GridBagConstraints.VERTICAL;
 		buttons.add(player1,c);
-		c.gridx=0;
-		c.gridy=3;
+		
+		c.gridx =1;
+		c.gridy =1;
+		buttons.add(saveP1,c);
+		
+		c.gridx = 0;
+		c.gridy = 2;
+		buttons.add(jlabel2,c);
+		
+		c.gridx =0;
+		c.gridy =3;
+		c.fill = GridBagConstraints.VERTICAL;
 		buttons.add(player2,c);
+		
+	
+		
+		c.gridx = 1;
+		c.gridy = 3;
+		buttons.add(saveP2,c);
+		
+		c.gridx =0;
+		c.gridy =4;
+		c.gridwidth = 2;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		buttons.add(start,c);
 		
 		frame.setTitle("Super Bunny Game");
 		frame.add(buttons, BorderLayout.WEST);
