@@ -45,7 +45,7 @@ import javax.imageio.*;
 		 public static final int PIXELS = 70; // square size per image
 		 public static final int MOVE = 20; // keyboard move
 		 public static final int GRAVITY = 10; // gravity move
-		 public static final int CARROTS = 3; // number of carrots
+		 public static final int CARROTS = 7; // number of carrots
 		 public static final int FIVE = 5;//wing 5 points
 		 
 		 // position of each carrot
