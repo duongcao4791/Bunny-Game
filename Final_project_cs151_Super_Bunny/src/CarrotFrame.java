@@ -39,16 +39,30 @@ import javax.swing.*;
 		             { 
 		                public void actionPerformed(ActionEvent event)
 		                {
-		                	
-		                	start.setText("Start Game " + (bunny1.getGame_number() + 1));
-		                	panel.add(start);
-		                	panel.add(finish);
-		                	content.add(panel, BorderLayout.SOUTH);
-		                	
-		                	carrotComponent.reset();
-		                	
-		                	bunny1.setGame_number(bunny1.getGame_number() + 1);
-		                	bunny2.setGame_number(bunny2.getGame_number() + 1);
+		                	if(bunny1.getGame_number() < 2) {
+			                	start.setText("Start Game " + (bunny1.getGame_number() + 1));
+			                	panel.add(start);
+			                	panel.add(finish);
+			                	content.add(panel, BorderLayout.SOUTH);
+			                	
+			                	carrotComponent.reset();
+			                	
+			                	bunny1.setGame_number(bunny1.getGame_number() + 1);
+			                	bunny2.setGame_number(bunny2.getGame_number() + 1);
+			                	
+		                	}else if (bunny1.getGame_number() < 3){
+		                		start.setText("Go back for another round");
+			                	panel.add(start);
+			                	panel.add(finish);
+			                	content.add(panel, BorderLayout.SOUTH);
+			                
+			                	carrotComponent.reset();
+			                	
+			                	bunny1.setGame_number(bunny1.getGame_number() + 1);
+			                	bunny2.setGame_number(bunny2.getGame_number() + 1);
+		                	}else {
+			                	dispose();
+		                	}
 
 		                }
 		             });
