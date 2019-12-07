@@ -16,8 +16,8 @@ public class Welcomepage {
 		
 		
 		JButton start =new JButton("Start  a  new  game");
-		JButton saveP1 =new JButton("Save Name");
-		JButton saveP2 =new JButton("Save Name");
+		//JButton saveP1 =new JButton("Save Name");
+		//JButton saveP2 =new JButton("Save Name");
 		
 		JLabel jlabel = new JLabel("Enter name of player 1:");
 	    jlabel.setFont(style);
@@ -37,10 +37,19 @@ public class Welcomepage {
 		
 		
 		start.addActionListener(event->{
+			name1 = player1.getText();
+			name2 = player2.getText();
+			if (name1 == "" || name2 == "") {
+				saveName1 = saveName2 = false;
+			}
+			else {
+				saveName1 = saveName2 = true;
+			}
+					
+					
 			if(saveName1  && saveName2 ) {
-				
-				int [] score1 = {-1 ,-1, -1, -1};
-				int [] score2 = {-1 ,-1, -1, -1};
+				int [] score1 = {0 ,0, 0, 0};
+				int [] score2 = {0 ,0, 0, 0};
 				Bunny_score bunny1 = new Bunny_score (name1.toUpperCase(), score1);
 				Bunny_score bunny2 = new Bunny_score (name2.toUpperCase(), score2);
 				
@@ -58,14 +67,14 @@ public class Welcomepage {
 	 	   }
 		
 		});
-		saveP1.addActionListener(event->{
-			name1 =  player1.getText(); 
-			saveName1 = true;
-		});
-		saveP2.addActionListener(event->{
-			name2 =  player2.getText(); 
-			saveName2 = true;
-		});
+//		saveP1.addActionListener(event->{
+//			name1 =  player1.getText(); 
+//			saveName1 = true;
+//		});
+//		saveP2.addActionListener(event->{
+//			name2 =  player2.getText(); 
+//			saveName2 = true;
+//		});
 		
 	
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,9 +97,9 @@ public class Welcomepage {
 		c.fill = GridBagConstraints.VERTICAL;
 		buttons.add(player1,c);
 		
-		c.gridx =1;
-		c.gridy =1;
-		buttons.add(saveP1,c);
+//		c.gridx =1;
+//		c.gridy =1;
+//		buttons.add(saveP1,c);
 		
 		c.gridx = 0;
 		c.gridy = 2;
@@ -103,9 +112,9 @@ public class Welcomepage {
 		
 	
 		
-		c.gridx = 1;
-		c.gridy = 3;
-		buttons.add(saveP2,c);
+//		c.gridx = 1;
+//		c.gridy = 3;
+//		buttons.add(saveP2,c);
 		
 		c.gridx =0;
 		c.gridy =4;

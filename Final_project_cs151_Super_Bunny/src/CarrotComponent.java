@@ -45,7 +45,7 @@ import javax.imageio.*;
 		 public static final int PIXELS = 70; // square size per image
 		 public static final int MOVE = 20; // keyboard move
 		 public static final int GRAVITY = 10; // gravity move
-		 public static final int CARROTS = 3; // number of carrots
+		 public static final int CARROTS = 20; // number of carrots
 		 public static final int FIVE = 5;//wing 5 points
 		 
 		 // position of each carrot
@@ -79,15 +79,15 @@ import javax.imageio.*;
 		 bunnyImage1[1] = readImage("image/upbunny01.png");
 		 bunnyImage1[2] = readImage("image/rightbunny01.png");
 		 bunnyImage1[3] = readImage("image/downbunny01.png");
-		 bunnyImage1[4] = readImage("image/Leftbunny01.png");
-		 bunnyImage1[5] = readImage("image/win01.jpg");
+		 bunnyImage1[4] = readImage("image/leftbunny01.png");
+		 bunnyImage1[5] = readImage("image/win01.png");
 		 bunnyImage1[6] = readImage("image/downbunny01.png");
 		
 		 //second bunny
 		 bunnyImage2 = new Image [7];
 		 bunnyImage2[0] = readImage("image/downbunny02.jpg" );
 		 bunnyImage2[1] = readImage("image/upbunny02.png");
-		 bunnyImage2[2] = readImage("image/Rigthbunny02.gif");
+		 bunnyImage2[2] = readImage("image/rightbunny02.png");
 		 bunnyImage2[3] = readImage("image/downbunny02.jpg" );
 		 bunnyImage2[4] = readImage("image/leftbunny02.jpg" );
 		 bunnyImage2[5] = readImage("image/win02.jpg" );
@@ -159,9 +159,11 @@ import javax.imageio.*;
         		       ImageIcon icon = new ImageIcon(bunnyImage1[5]);
         		       JOptionPane.showMessageDialog(null, "The winner is " + bunny_1Inform.getPlayerName()  +".", 
         			   "WINNER MESSAGE", JOptionPane.INFORMATION_MESSAGE, icon);
-        	   }  
+        	   }else {
+        		   	JOptionPane.showMessageDialog( null, "Game TIE!!!");
         	   
              }
+           }
        } 
 		
 		
@@ -210,7 +212,7 @@ import javax.imageio.*;
 	    		 }
 	    	 }
 	    	 ////second bunny
-	    	 if (code == KeyEvent.VK_E)//Up
+	    	 if (code == KeyEvent.VK_W)//Up
 	    	 {
 	    		 if(my2Y > 0) { 
 		    	   my2Y += -MOVE;
@@ -218,7 +220,7 @@ import javax.imageio.*;
 		    	   bunnyImage2[0] = bunnyImage2[1];
 	    		 }
 	    	 }
-	    	 else if (code == KeyEvent.VK_X) //down
+	    	 else if (code == KeyEvent.VK_S) //down
 	    	 {
 	    		 if(my2Y < getHeight() - (PIXELS + 10) ) {
 		    	   my2Y += MOVE;
@@ -226,7 +228,7 @@ import javax.imageio.*;
 		    	   bunnyImage2[0] = bunnyImage2[3];
 	    		 }
 	    	 }
-	    	 else if (code == KeyEvent.VK_S) //Left
+	    	 else if (code == KeyEvent.VK_A) //Left
 	    	 {
 	    		 if(my2X > 0) {
 		    	   my2X += -MOVE;
@@ -289,7 +291,7 @@ import javax.imageio.*;
         	 int x = 38;
         	 int y = 40;
         	
-        	 g.setColor(Color.green);
+        	 g.setColor(Color.WHITE);
         	 g.fillRect(x*i + x, y,  35,  35);
         	 g.fillRect(getWidth()- 200 + x*i, y, 35, 35);
         	 
