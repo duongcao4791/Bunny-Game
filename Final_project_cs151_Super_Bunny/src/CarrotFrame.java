@@ -40,18 +40,29 @@ import javax.swing.*;
 		                public void actionPerformed(ActionEvent event)
 		                {
 		                	if(bunny1.getGame_number() < 2) {
+<<<<<<< HEAD
 			                	
 			                	
 			                	bunny1.setGame_number(bunny1.getGame_number() + 1);
 			                	bunny2.setGame_number(bunny2.getGame_number() + 1);
 			                	
+=======
+>>>>>>> 55cfe812d2906e76f522faa18732152e53407e62
 			                	start.setText("Start Game " + (bunny1.getGame_number() + 1));
 			                	panel.add(start);
 			                	panel.add(finish);
 			                	content.add(panel, BorderLayout.SOUTH);
 			                	
 			                	carrotComponent.reset();
+<<<<<<< HEAD
 		                	}else if (bunny1.getGame_number() <3 ){
+=======
+			                	
+			                	bunny1.setGame_number(bunny1.getGame_number() + 1);
+			                	bunny2.setGame_number(bunny2.getGame_number() + 1);
+			                	
+		                	}else if (bunny1.getGame_number() < 3){
+>>>>>>> 55cfe812d2906e76f522faa18732152e53407e62
 		                		start.setText("Go back for another round");
 			                	panel.add(start);
 			                	panel.add(finish);
